@@ -8,17 +8,62 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: "Helvetica Neue", Arial, sans-serif; color: #333; background-color: #f9f9f9; line-height: 1.6; }
     
-    /* 標頭設定：僅顯示 Logo */
-    header { background: #fff; text-align: center; padding: 30px 20px; border-bottom: 1px solid #eee; }
-    .site-logo { max-height: 150px; width: auto; object-fit: contain; }
+    /* 標頭設定 */
+    header { 
+      background: #fff; 
+      padding: 20px 30px; 
+      border-bottom: 1px solid #eee; 
+      position: sticky; 
+      top: 0; 
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
     
-    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-    .section-title { text-align: center; margin-bottom: 30px; font-size: 20px; letter-spacing: 1px; }
+    .header-placeholder { width: 40px; } /* 平衡左右空間 */
+    .site-logo { max-height: 80px; width: auto; object-fit: contain; }
     
-    /* 商品排版網格 */
+    /* 購物車圖標與 Badge */
+    .cart-trigger {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      transition: color 0.2s;
+    }
+    .cart-trigger:hover { color: #e44d26; }
+    .cart-trigger svg { width: 26px; height: 26px; fill: currentColor; }
+    
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background-color: #e44d26;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      height: 18px;
+      min-width: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    
+    .container { max-width: 950px; margin: 40px auto; padding: 0 20px; }
+    .section-title { text-align: center; margin-bottom: 30px; font-size: 20px; letter-spacing: 1px; font-weight: 600; }
+    
+    /* 商品網格 */
     .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
     
-    /* 使用 Flex 排版讓卡片同高，按鈕自動吸附底部 */
     .product-card { 
       background: #fff; 
       border-radius: 8px; 
@@ -28,12 +73,13 @@
       flex-direction: column;
     }
     
-    /* 圖片滑動輪播區塊 */
+    /* 圖片輪播 */
     .slider-container {
       position: relative;
       width: 100%;
       height: 300px;
       overflow: hidden;
+      background-color: #f2f2f2;
     }
     
     .slider {
@@ -43,17 +89,10 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
-      scrollbar-width: none; /* 隱藏 Firefox 捲軸 */
-      cursor: grab;
+      scrollbar-width: none;
     }
     
-    .slider:active {
-      cursor: grabbing;
-    }
-    
-    .slider::-webkit-scrollbar {
-      display: none; /* 隱藏 Chrome/Safari 捲軸 */
-    }
+    .slider::-webkit-scrollbar { display: none; }
     
     .slider img {
       width: 100%;
@@ -80,17 +119,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 14px;
       transition: background 0.3s, opacity 0.3s;
       z-index: 2;
       opacity: 0.7;
     }
 
-    .nav-btn:hover {
-      background: rgba(0, 0, 0, 0.8);
-      opacity: 1;
-    }
-
+    .nav-btn:hover { background: rgba(0, 0, 0, 0.8); opacity: 1; }
     .prev-btn { left: 10px; }
     .next-btn { right: 10px; }
     
@@ -98,36 +133,261 @@
       padding: 20px; 
       display: flex;
       flex-direction: column;
-      flex: 1; /* 自動填滿剩餘高度 */
+      flex: 1; 
     }
     
     .product-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; }
     .product-price { color: #e44d26; font-weight: bold; font-size: 18px; margin-bottom: 12px; }
     .product-desc { font-size: 13px; color: #666; margin-bottom: 15px; }
     
-    /* margin-top: auto 確保按鈕固定在最底部對齊 */
+    /* 顏色選擇圓圈區塊 (Uniqlo 風格) */
+    .color-section {
+      margin-bottom: 15px;
+    }
+    
+    .color-label {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .swatch-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      position: relative;
+      background-color: #eee;
+      padding: 0;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      outline: none;
+    }
+
+    .swatch-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* 選中狀態的外圈黑框效果 */
+    .swatch-btn.active {
+      border: 2px solid #000;
+      box-shadow: 0 0 0 2px #fff inset;
+    }
+
+    /* 加入購物車按鈕 (齊平底部) */
     .buy-btn { 
       margin-top: auto; 
       display: block; 
+      width: 100%;
       text-align: center; 
       background: #222; 
       color: #fff; 
-      padding: 10px; 
-      text-decoration: none; 
+      padding: 12px; 
+      border: none;
       border-radius: 4px; 
       font-size: 14px; 
-      transition: 0.3s; 
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s; 
     }
     .buy-btn:hover { background: #444; }
     
+    /* 購物車 Side Drawer */
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .cart-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: #fff;
+      z-index: 1001;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cart-drawer.active {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-header h3 { font-size: 18px; font-weight: 600; }
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #888;
+      padding: 0 4px;
+    }
+    .close-cart:hover { color: #000; }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: #999;
+      margin-top: 60px;
+      font-size: 14px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .cart-item img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .cart-item-details { flex: 1; }
+    .cart-item-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+    .cart-item-variant { font-size: 12px; color: #777; margin-bottom: 4px; }
+    .cart-item-price { font-size: 14px; color: #e44d26; font-weight: bold; margin-bottom: 8px; }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qty-btn {
+      width: 24px;
+      height: 24px;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qty-btn:hover { background: #f0f0f0; }
+    .item-qty { font-size: 13px; font-weight: bold; }
+
+    .delete-item {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      font-size: 12px;
+      text-decoration: underline;
+    }
+    .delete-item:hover { color: #e44d26; }
+
+    .cart-footer {
+      padding: 20px;
+      border-top: 1px solid #eee;
+      background: #fafafa;
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .cart-total-price { color: #e44d26; font-size: 20px; }
+    .checkout-btn {
+      width: 100%;
+      background: #e44d26;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .checkout-btn:hover { background: #c83b17; }
+    .shipping-note {
+      text-align: center;
+      font-size: 11px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    /* 自訂通知 Modal 彈窗 */
+    .custom-toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .custom-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* 頁尾與 IG 連結 */
     footer { text-align: center; padding: 40px 20px; font-size: 12px; color: #888; background: #fff; margin-top: 60px; border-top: 1px solid #eee; }
+    .social-links { margin-bottom: 15px; }
+    .social-icon { display: inline-flex; align-items: center; justify-content: center; color: #333; text-decoration: none; transition: opacity 0.3s; }
+    .social-icon:hover { opacity: 0.7; }
+    .social-icon svg { width: 28px; height: 28px; fill: currentColor; }
   </style>
 </head>
 <body>
 
   <!-- 網站標頭 -->
   <header>
-    <img src="LOGO.jpg" alt="Logo" class="site-logo">
+    <div class="header-placeholder"></div>
+    <img src="LOGO.jpg" alt="Logo" class="site-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x80/ffffff/333333?text=LOGO';">
+    <button class="cart-trigger" onclick="toggleCart()" aria-label="Shopping Cart">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
   </header>
 
   <div class="container">
@@ -135,15 +395,15 @@
     
     <div class="product-grid">
       
-      <!-- 商品 1 (多圖：顯示左右箭頭) -->
-      <div class="product-card">
+      <!-- 商品 1 -->
+      <div class="product-card" data-product-id="1">
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
-          <div class="slider">
-            <img src="Ladies Blue Sunflower Zip Hoodie White1.jpg" alt="White Hoodie1">
-            <img src="Ladies Blue Sunflower Zip Hoodie White2.jpg" alt="White Hoodie2">
-            <img src="Ladies Blue Sunflower Zip Hoodie Black1.jpg" alt="Black Hoodie1">
-            <img src="Ladies Blue Sunflower Zip Hoodie Black2.jpg" alt="Black Hoodie2">
+          <div class="slider" id="slider-1">
+            <img src="Ladies Blue Sunflower Zip Hoodie White1.jpg" alt="White Hoodie1" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White+1';">
+            <img src="Ladies Blue Sunflower Zip Hoodie White2.jpg" alt="White Hoodie2" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White+2';">
+            <img src="Ladies Blue Sunflower Zip Hoodie Black1.jpg" alt="Black Hoodie1" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black+1';">
+            <img src="Ladies Blue Sunflower Zip Hoodie Black2.jpg" alt="Black Hoodie2" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black+2';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -154,15 +414,31 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+
+          <!-- 圓形顏色選塊 -->
+          <div class="color-section">
+            <div class="color-label" id="color-label-1">カラー: White</div>
+            <div class="color-swatches">
+              <button class="swatch-btn active" 
+                      style="background-color: #ffffff;" 
+                      title="White"
+                      onclick="selectColor(1, 'White', 0, 'Ladies Blue Sunflower Zip Hoodie White1.jpg', this)"></button>
+              <button class="swatch-btn" 
+                      style="background-color: #111111;" 
+                      title="Black"
+                      onclick="selectColor(1, 'Black', 2, 'Ladies Blue Sunflower Zip Hoodie Black1.jpg', this)"></button>
+            </div>
+          </div>
+
+          <button class="buy-btn" onclick="addToCart('Ladies Blue Sunflower Zip Hoodie', 12000, 1, 'slider-1')">カートに追加</button>
         </div>
       </div>
 
-      <!-- 商品 2 (單圖) -->
+      <!-- 商品 2 -->
       <div class="product-card">
         <div class="slider-container">
-          <div class="slider">
-            <img src="Blue Sunflower Hoodie.jpg" alt="Black Hoodie">
+          <div class="slider" id="slider-2">
+            <img src="Blue Sunflower Hoodie.jpg" alt="Blue Sunflower Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Hoodie';">
           </div>
         </div>
         <div class="product-info">
@@ -172,15 +448,15 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+          <button class="buy-btn" onclick="addToCart('Blue Sunflower Hoodie', 9500, null, 'slider-2')">カートに追加</button>
         </div>
       </div>
 
-      <!-- 商品 3 (單圖) -->
+      <!-- 商品 3 -->
       <div class="product-card">
         <div class="slider-container">
-          <div class="slider">
-            <img src="Blue Sunflower Zip Hoodie.jpg" alt="商品圖片">
+          <div class="slider" id="slider-3">
+            <img src="Blue Sunflower Zip Hoodie.jpg" alt="Blue Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Zip+Hoodie';">
           </div>
         </div>
         <div class="product-info">
@@ -190,17 +466,17 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+          <button class="buy-btn" onclick="addToCart('Blue Sunflower Zip Hoodie', 12000, null, 'slider-3')">カートに追加</button>
         </div>
       </div>
 
-      <!-- 商品 4 (多圖：顯示左右箭頭) -->
-      <div class="product-card">
+      <!-- 商品 4 -->
+      <div class="product-card" data-product-id="4">
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
-          <div class="slider">
-            <img src="Bear Edition Zip Hoodie Blue.jpg" alt="Blue Hoodie">
-            <img src="Bear Edition Zip Hoodie Pink.jpg" alt="Pink Hoodie">
+          <div class="slider" id="slider-4">
+            <img src="Bear Edition Zip Hoodie Blue.jpg" alt="Blue Hoodie" onerror="this.src='https://placehold.co/400x400/dbeafe/1e40af?text=Bear+Blue';">
+            <img src="Bear Edition Zip Hoodie Pink.jpg" alt="Pink Hoodie" onerror="this.src='https://placehold.co/400x400/fce7f3/9d174d?text=Bear+Pink';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -211,22 +487,77 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+
+          <!-- 圓形顏色選塊 -->
+          <div class="color-section">
+            <div class="color-label" id="color-label-4">カラー: Blue</div>
+            <div class="color-swatches">
+              <button class="swatch-btn active" 
+                      style="background-color: #3b82f6;" 
+                      title="Blue"
+                      onclick="selectColor(4, 'Blue', 0, 'Bear Edition Zip Hoodie Blue.jpg', this)"></button>
+              <button class="swatch-btn" 
+                      style="background-color: #ec4899;" 
+                      title="Pink"
+                      onclick="selectColor(4, 'Pink', 1, 'Bear Edition Zip Hoodie Pink.jpg', this)"></button>
+            </div>
+          </div>
+
+          <button class="buy-btn" onclick="addToCart('Bear Edition Zip Hoodie', 12000, 4, 'slider-4')">カートに追加</button>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- 頁尾聲明 -->
+  <!-- 購物車 Modal Overlay & Drawer -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>ショッピングカート</h3>
+      <button class="close-cart" onclick="toggleCart()">&times;</button>
+    </div>
+    
+    <div class="cart-items" id="cartItems">
+      <div class="empty-cart">カートに商品が入っていません</div>
+    </div>
+    
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>合計 (税込):</span>
+        <span class="cart-total-price" id="cartTotal">¥0</span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">ご購入手続きへ</button>
+      <div class="shipping-note">配送方法：台湾発送 (EMS / 国際スピード郵便)</div>
+    </div>
+  </div>
+
+  <!-- Toast 訊息通知 -->
+  <div class="custom-toast" id="toast"></div>
+
+  <!-- 頁尾聲明與 IG 連結 -->
   <footer>
-    <p>配送方法：台湾発送 (EMS / 國際スピード郵便)</p>
+    <div class="social-links">
+      <a href="https://instagram.com/maison_bear__" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+    </div>
+    <p>配送方法：台湾発送 (EMS / 国際スピード郵便)</p>
     <p>&copy; 2026. All rights reserved.</p>
   </footer>
 
-  <!-- 點擊與拖曳控制腳本 -->
+  <!-- 購物車與選色邏輯腳本 -->
   <script>
-    // 點擊箭頭移動切換
+    let cart = [];
+    // 記錄有顏色選單商品的當前選中狀態
+    const selectedVariants = {
+      1: { color: 'White', imgSrc: 'Ladies Blue Sunflower Zip Hoodie White1.jpg' },
+      4: { color: 'Blue', imgSrc: 'Bear Edition Zip Hoodie Blue.jpg' }
+    };
+
+    // 點擊箭頭切換圖檔
     function moveSlide(button, direction) {
       const container = button.parentElement;
       const slider = container.querySelector('.slider');
@@ -234,27 +565,158 @@
       slider.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
     }
 
-    // 支援滑鼠拖曳滑動
-    document.querySelectorAll('.slider').forEach(slider => {
-      let isDown = false;
-      let startX;
-      let scrollLeft;
+    // 點擊顏色圓圈選塊 (Color Swatch)
+    function selectColor(productId, colorName, slideIndex, imgSrc, btnElement) {
+      // 1. 更新選中的顏色數據
+      selectedVariants[productId] = {
+        color: colorName,
+        imgSrc: imgSrc
+      };
 
-      slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
+      // 2. 更新標題文字 (例如 "カラー: White")
+      const label = document.getElementById(`color-label-${productId}`);
+      if (label) {
+        label.textContent = `カラー: ${colorName}`;
+      }
+
+      // 3. 更新按鈕選中樣式 (Highlight active swatch)
+      const parentContainer = btnElement.parentElement;
+      const buttons = parentContainer.querySelectorAll('.swatch-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      // 4. 切換圖片輪播至對應的 index
+      const slider = document.getElementById(`slider-${productId}`);
+      if (slider && !isNaN(slideIndex)) {
+        const slideWidth = slider.clientWidth;
+        slider.scrollTo({ left: slideIndex * slideWidth, behavior: 'smooth' });
+      }
+    }
+
+    // 切換 Drawer 開關
+    function toggleCart() {
+      document.getElementById('cartOverlay').classList.toggle('active');
+      document.getElementById('cartDrawer').classList.toggle('active');
+    }
+
+    // 加入購物車
+    function addToCart(title, price, productId, sliderId) {
+      let variant = '';
+      let imgSrc = '';
+
+      if (productId && selectedVariants[productId]) {
+        variant = selectedVariants[productId].color;
+        imgSrc = selectedVariants[productId].imgSrc;
+      }
+
+      if (!imgSrc) {
+        const slider = document.getElementById(sliderId);
+        if (slider) {
+          const activeImg = slider.querySelector('img');
+          if (activeImg) imgSrc = activeImg.getAttribute('src');
+        }
+      }
+
+      const cartItemId = `${title}-${variant}`;
+      const existingItem = cart.find(item => item.id === cartItemId);
+
+      if (existingItem) {
+        existingItem.qty += 1;
+      } else {
+        cart.push({
+          id: cartItemId,
+          title: title,
+          price: price,
+          variant: variant,
+          imgSrc: imgSrc,
+          qty: 1
+        });
+      }
+
+      updateCartUI();
+      toggleCart();
+    }
+
+    // 更新數量
+    function updateQty(id, change) {
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty += change;
+        if (item.qty <= 0) {
+          cart = cart.filter(i => i.id !== id);
+        }
+      }
+      updateCartUI();
+    }
+
+    // 移除商品
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCartUI();
+    }
+
+    // 渲染購物車介面與計算總額
+    function updateCartUI() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      const cartBadge = document.getElementById('cartBadge');
+      const cartTotal = document.getElementById('cartTotal');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartBadge.textContent = totalItems;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<div class="empty-cart">カートに商品が入っていません</div>';
+        cartTotal.textContent = '¥0';
+        return;
+      }
+
+      let html = '';
+      let totalPrice = 0;
+
+      cart.forEach(item => {
+        const itemSubtotal = item.price * item.qty;
+        totalPrice += itemSubtotal;
+
+        html += `
+          <div class="cart-item">
+            <img src="${item.imgSrc}" alt="${item.title}" onerror="this.src='https://placehold.co/100x100/eeeeee/888888?text=Item';">
+            <div class="cart-item-details">
+              <div class="cart-item-title">${item.title}</div>
+              ${item.variant ? `<div class="cart-item-variant">Color: ${item.variant}</div>` : ''}
+              <div class="cart-item-price">¥${item.price.toLocaleString()}</div>
+              <div class="cart-item-actions">
+                <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
+                <span class="item-qty">${item.qty}</span>
+                <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+                <button class="delete-item" onclick="removeFromCart('${item.id}')">削除</button>
+              </div>
+            </div>
+          </div>
+        `;
       });
-      slider.addEventListener('mouseleave', () => { isDown = false; });
-      slider.addEventListener('mouseup', () => { isDown = false; });
-      slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        slider.scrollLeft = scrollLeft - walk;
-      });
-    });
+
+      cartItemsContainer.innerHTML = html;
+      cartTotal.textContent = `¥${totalPrice.toLocaleString()}`;
+    }
+
+    // Toast 通知
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // 結帳提示
+    function checkout() {
+      if (cart.length === 0) {
+        showToast('カートが空です。');
+        return;
+      }
+      showToast('ご注文手続きへ進みます。Instagram DMにてご注文内容をご連絡ください！');
+    }
   </script>
 
 </body>
