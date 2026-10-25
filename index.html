@@ -97,11 +97,12 @@
     .slider img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* 改成 contain 即可完整顯示整張圖片，不被裁切 */
       flex-shrink: 0;
       scroll-snap-align: start;
       user-select: none;
       -webkit-user-drag: none;
+      background-color: #fff; /* （可選）加入白底，確保直式/橫式圖片兩側或上下補白自然 */
     }
 
     /* 電腦版左右切換箭頭 */
