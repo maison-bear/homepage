@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONLINE SHOP</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Helvetica Neue", Arial, sans-serif; color: #333; background-color: #f9f9f9; line-height: 1.6; }
+    
+    /* 標頭設定：僅顯示 Logo */
+    header { background: #fff; text-align: center; padding: 30px 20px; border-bottom: 1px solid #eee; }
+    .site-logo { max-height: 150px; width: auto; object-fit: contain; }
+    
+    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .section-title { text-align: center; margin-bottom: 30px; font-size: 20px; letter-spacing: 1px; }
+    
+    /* 商品排版網格 */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+    .product-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .product-card img { width: 100%; height: 300px; object-fit: cover; }
+    .product-info { padding: 20px; }
+    .product-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+    .product-price { color: #e44d26; font-weight: bold; font-size: 18px; margin-bottom: 12px; }
+    .product-desc { font-size: 13px; color: #666; margin-bottom: 15px; }
+    
+    .buy-btn { display: block; text-align: center; background: #222; color: #fff; padding: 10px; text-decoration: none; border-radius: 4px; font-size: 14px; transition: 0.3s; }
+    .buy-btn:hover { background: #444; }
+    
+    footer { text-align: center; padding: 40px 20px; font-size: 12px; color: #888; background: #fff; margin-top: 60px; border-top: 1px solid #eee; }
+  </style>
+</head>
+<body>
+
+  <!-- 網站標頭 -->
+  <header>
+    <img src="LINE_20261014_150810.jpg" alt="Logo" class="site-logo">
+  </header>
+
+  <div class="container">
+    <h2 class="section-title">NEW ARRIVALS</h2>
+    
+    <!-- 所有商品統一放在這個大格子裡面 -->
+    <div class="product-grid">
+      
+      <!-- 商品 1 -->
+      <div class="product-card">
+        <img src="LINE_ALBUM_商品企画提案_261014_1.jpg" alt="商品圖片">
+        <div class="product-info">
+          <div class="product-title">Tシャツ 1</div>
+          <div class="product-price">¥4,800 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+        </div>
+      </div>
+
+      <!-- 商品 2 -->
+      <div class="product-card">
+        <img src="LINE_ALBUM_商品企画提案_261014_2.jpg" alt="商品圖片">
+        <div class="product-info">
+          <div class="product-title">Tシャツ 2</div>
+          <div class="product-price">¥3,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+        </div>
+      </div>
+
+      <!-- 商品 3 -->
+      <div class="product-card">
+        <img src="LINE_ALBUM_商品企画提案_261014_3.jpg" alt="商品圖片">
+        <div class="product-info">
+          <div class="product-title">Tシャツ 3</div>
+          <div class="product-price">¥3,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+        </div>
+      </div>
+
+      <!-- 商品 4 -->
+      <div class="product-card">
+        <img src="LINE_ALBUM_商品企画提案_261014_4.jpg" alt="商品圖片">
+        <div class="product-info">
+          <div class="product-title">Tシャツ 4</div>
+          <div class="product-price">¥3,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+        </div>
+      </div>
+
+      <!-- 商品 5 -->
+      <div class="product-card">
+        <img src="S__36069408.jpg" alt="商品圖片">
+        <div class="product-info">
+          <div class="product-title">パーカー</div>
+          <div class="product-price">¥9,500 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+        </div>
+      </div>
+
+      <!-- 商品 6 -->
+      <div class="product-card">
+        <img src="S__36069407.jpg" alt="商品圖片">
+        <div class="product-info">
+          <div class="product-title">ジップパーカー</div>
+          <div class="product-price">¥12,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+        </div>
+      </div>
+
+      <!-- 商品 7 -->
+      <div class="product-card">
+        <img src="S__36069406.jpg" alt="商品圖片">
+        <div class="product-info">
+          <div class="product-title">ジップパーカー</div>
+          <div class="product-price">¥12,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <a href="https://instagram.com" class="buy-btn" target="_blank">DMで注文する</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 頁尾聲明 -->
+  <footer>
+    <p>配送方法：台湾発送 (EMS / 國際スピード郵便)</p>
+    <p>&copy; 2026. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
