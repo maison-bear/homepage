@@ -673,31 +673,26 @@
       }, 3000);
     }
 
-    // 1. 點擊購物車內的「前往結帳」按鈕
     function openCheckoutModal() {
       if (cart.length === 0) {
         showToast('カートが空です。');
         return;
       }
-      // 關閉購物車抽屜
       toggleCart();
-      // 打開收件資訊填寫彈窗
       document.getElementById('checkoutModalOverlay').classList.add('active');
     }
 
-    // 2. 關閉收件資訊彈窗
     function closeCheckoutModal() {
       document.getElementById('checkoutModalOverlay').classList.remove('active');
     }
 
-    // 點擊彈窗外部背景可關閉
     function closeCheckoutModalOnOutside(event) {
       if (event.target.id === 'checkoutModalOverlay') {
         closeCheckoutModal();
       }
     }
 
-    // 3. 填寫完收件資訊後，點擊確認送出 -> 打包並跳轉到 IG DM
+    // 點擊送出訂單：自動複製訂單到剪貼簿並導向 IG 聊天室
     function sendOrderToInstagram() {
       const name = document.getElementById('custName').value.trim();
       const phone = document.getElementById('custPhone').value.trim();
@@ -728,12 +723,22 @@
         `ご住所: ${address}\n\n` +
         `よろしくお願いいたします！`;
 
-      const encodedMessage = encodeURIComponent(message);
       const igUsername = 'maison_bear__'; 
-      const igUrl = `https://ig.me/m/${igUsername}?text=${encodedMessage}`;
-      
-      window.open(igUrl, '_blank');
-      closeCheckoutModal();
+
+      // 使用剪貼簿 API 自動複製文字
+      navigator.clipboard.writeText(message).then(() => {
+        alert('注文内容をコピーしました！\nInstagramのDMが開いたら、メッセージ欄にペースト（貼り付け）して送信してください。\n\n(訂單明細已複製！跳轉至 IG 後直接在對話框「貼上」送出即可！)');
+        
+        const igUrl = `https://ig.me/m/${igUsername}`;
+        window.open(igUrl, '_blank');
+        closeCheckoutModal();
+      }).catch(err => {
+        // 備用方案（若部分舊版瀏覽器不支援剪貼簿）
+        const encodedMessage = encodeURIComponent(message);
+        const igUrl = `https://ig.me/m/${igUsername}?text=${encodedMessage}`;
+        window.open(igUrl, '_blank');
+        closeCheckoutModal();
+      });
     }
   </script>
 
