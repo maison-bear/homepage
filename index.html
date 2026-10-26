@@ -481,7 +481,7 @@
         <span>合計 (税込):</span>
         <span class="cart-total-price" id="cartTotal">¥0</span>
       </div>
-      <button class="checkout-btn" onclick="openCheckoutModal()">ご購入手続きへ (前往結帳)</button>
+      <button class="checkout-btn" onclick="openCheckoutModal()">ご購入手続きへ</button>
     </div>
   </div>
 
@@ -727,7 +727,7 @@
 
       // 使用剪貼簿 API 自動複製文字
       navigator.clipboard.writeText(message).then(() => {
-        alert('注文内容をコピーしました！\nInstagramが開いたら、DMのメッセージ欄にペースト（貼り付け）して送信してください。\n\n(訂單內容已複製！開啟 IG 後請直接在私訊貼上送出！)');
+        alert('注文内容をコピーしました！\nInstagramが開いたら、DMのメッセージ欄にペースト（貼り付け）して送信してください。');
         
         // 喚起 App 與備用網頁連結
         const appUrl = `instagram://user?username=${igUsername}`;
