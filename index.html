@@ -37,14 +37,14 @@
       color: #333;
       transition: color 0.2s;
     }
-    .cart-trigger:hover { color: #e44d26; }
+    .cart-trigger:hover { color: #222; }
     .cart-trigger svg { width: 26px; height: 26px; fill: currentColor; }
     
     .cart-badge {
       position: absolute;
       top: 2px;
       right: 2px;
-      background-color: #e44d26;
+      background-color: #222; /* 購物車小紅點改為黑色高質感 Badge */
       color: #fff;
       font-size: 11px;
       font-weight: bold;
@@ -136,7 +136,7 @@
     }
     
     .product-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; }
-    .product-price { color: #e44d26; font-weight: bold; font-size: 18px; margin-bottom: 12px; }
+    .product-price { color: #222; font-weight: 600; font-size: 17px; margin-bottom: 12px; } /* 改為沉穩黑色 */
     .product-desc { font-size: 13px; color: #666; margin-bottom: 15px; }
     
     .color-section { margin-bottom: 15px; }
@@ -221,7 +221,7 @@
     .cart-item-details { flex: 1; }
     .cart-item-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
     .cart-item-variant { font-size: 12px; color: #777; margin-bottom: 4px; }
-    .cart-item-price { font-size: 14px; color: #e44d26; font-weight: bold; margin-bottom: 8px; }
+    .cart-item-price { font-size: 14px; color: #222; font-weight: bold; margin-bottom: 8px; } /* 改為沉穩黑色 */
 
     .cart-item-actions { display: flex; align-items: center; gap: 10px; }
     .qty-btn { width: 24px; height: 24px; border: 1px solid #ccc; background: #fff; border-radius: 3px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
@@ -229,11 +229,11 @@
     .item-qty { font-size: 13px; font-weight: bold; }
 
     .delete-item { margin-left: auto; background: none; border: none; color: #999; cursor: pointer; font-size: 12px; text-decoration: underline; }
-    .delete-item:hover { color: #e44d26; }
+    .delete-item:hover { color: #222; }
 
     .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #fafafa; }
     .cart-total-row { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; }
-    .cart-total-price { color: #e44d26; font-size: 18px; }
+    .cart-total-price { color: #222; font-size: 18px; } /* 改為沉穩黑色 */
     
     .checkout-btn {
       width: 100%;
@@ -308,7 +308,7 @@
 
     .submit-order-btn {
       width: 100%;
-      background: #e44d26;
+      background: #222; /* 結帳送出按鈕統一為黑色風格 */
       color: #fff;
       border: none;
       padding: 14px;
@@ -319,7 +319,7 @@
       transition: background 0.3s;
       margin-top: 10px;
     }
-    .submit-order-btn:hover { background: #c83b17; }
+    .submit-order-btn:hover { background: #444; }
 
     /* Toast 通知 */
     .custom-toast {
@@ -727,18 +727,15 @@
 
       // 使用剪貼簿 API 自動複製文字
       navigator.clipboard.writeText(message).then(() => {
-        alert('注文内容をコピーしました！\nInstagramが開いたら、DMのメッセージ欄にペースト（貼り付け）して送信してください。');
+        alert('注文内容をコピーしました！\nInstagramが開いたら、DMのメッセージ欄にペースト（貼り付け）して送信してください。\n\n(訂單內容已複製！開啟 IG 後請直接在私訊貼上送出！)');
         
-        // 喚起 App 與備用網頁連結
         const appUrl = `instagram://user?username=${igUsername}`;
         const webUrl = `https://ig.me/m/${igUsername}`;
 
-        // 判斷是否為手機裝置
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
         if (isMobile) {
           window.location.href = appUrl;
-          // 若手機未安裝 App 或跳轉失敗，1.5秒後備用開啟網頁版
           setTimeout(() => {
             window.open(webUrl, '_blank');
           }, 1500);
@@ -748,7 +745,6 @@
 
         closeCheckoutModal();
       }).catch(err => {
-        // 備用方案（若瀏覽器不支援剪貼簿）
         const webUrl = `https://ig.me/m/${igUsername}`;
         window.open(webUrl, '_blank');
         closeCheckoutModal();
