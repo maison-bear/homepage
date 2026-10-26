@@ -21,7 +21,7 @@
       justify-content: space-between;
     }
     
-    .header-placeholder { width: 40px; } /* 平衡左右空間 */
+    .header-placeholder { width: 40px; }
     .site-logo { max-height: 80px; width: auto; object-fit: contain; }
     
     /* 購物車圖標與 Badge */
@@ -77,7 +77,7 @@
     .slider-container {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1; /* 設定為 1:1 正方形比例，照片最整齊 */
+      aspect-ratio: 1 / 1;
       overflow: hidden;
       background-color: #fff;
     }
@@ -97,14 +97,13 @@
     .slider img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* 確保整張衣服照片完整顯示，絕不切邊 */
+      object-fit: contain;
       flex-shrink: 0;
       scroll-snap-align: start;
       user-select: none;
       -webkit-user-drag: none;
     }
 
-    /* 電腦版左右切換箭頭 */
     .nav-btn {
       position: absolute;
       top: 50%;
@@ -140,22 +139,9 @@
     .product-price { color: #e44d26; font-weight: bold; font-size: 18px; margin-bottom: 12px; }
     .product-desc { font-size: 13px; color: #666; margin-bottom: 15px; }
     
-    /* 顏色選擇圓圈區塊 (Uniqlo 風格) */
-    .color-section {
-      margin-bottom: 15px;
-    }
-    
-    .color-label {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 8px;
-    }
-
-    .color-swatches {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
+    .color-section { margin-bottom: 15px; }
+    .color-label { font-size: 13px; color: #555; margin-bottom: 8px; }
+    .color-swatches { display: flex; gap: 10px; align-items: center; }
 
     .swatch-btn {
       width: 28px;
@@ -169,15 +155,8 @@
       transition: transform 0.2s ease, border-color 0.2s ease;
       outline: none;
     }
-
-    .swatch-btn:hover {
-      transform: scale(1.1);
-    }
-
-    .swatch-btn.active {
-      border: 2px solid #000;
-      box-shadow: 0 0 0 2px #fff inset;
-    }
+    .swatch-btn:hover { transform: scale(1.1); }
+    .swatch-btn.active { border: 2px solid #000; box-shadow: 0 0 0 2px #fff inset; }
 
     .buy-btn { 
       margin-top: auto; 
@@ -199,27 +178,20 @@
     /* 購物車 Side Drawer */
     .cart-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0,0,0,0.5);
       z-index: 1000;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    .cart-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .cart-overlay.active { opacity: 1; visibility: visible; }
 
     .cart-drawer {
       position: fixed;
-      top: 0;
-      right: -420px;
-      width: 100%;
-      max-width: 400px;
+      top: 0; right: -420px;
+      width: 100%; max-width: 400px;
       height: 100%;
       background: #fff;
       z-index: 1001;
@@ -228,9 +200,7 @@
       flex-direction: column;
       transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .cart-drawer.active {
-      right: 0;
-    }
+    .cart-drawer.active { right: 0; }
 
     .cart-header {
       padding: 20px;
@@ -240,120 +210,29 @@
       align-items: center;
     }
     .cart-header h3 { font-size: 18px; font-weight: 600; }
-    .close-cart {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #888;
-      padding: 0 4px;
-    }
+    .close-cart { background: none; border: none; font-size: 24px; cursor: pointer; color: #888; padding: 0 4px; }
     .close-cart:hover { color: #000; }
 
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
+    .empty-cart { text-align: center; color: #999; margin-top: 40px; font-size: 14px; }
 
-    .empty-cart {
-      text-align: center;
-      color: #999;
-      margin-top: 40px;
-      font-size: 14px;
-    }
-
-    .cart-item {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    .cart-item img {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
+    .cart-item { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; }
+    .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 4px; }
     .cart-item-details { flex: 1; }
     .cart-item-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
     .cart-item-variant { font-size: 12px; color: #777; margin-bottom: 4px; }
     .cart-item-price { font-size: 14px; color: #e44d26; font-weight: bold; margin-bottom: 8px; }
 
-    .cart-item-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .qty-btn {
-      width: 24px;
-      height: 24px;
-      border: 1px solid #ccc;
-      background: #fff;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .cart-item-actions { display: flex; align-items: center; gap: 10px; }
+    .qty-btn { width: 24px; height: 24px; border: 1px solid #ccc; background: #fff; border-radius: 3px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
     .qty-btn:hover { background: #f0f0f0; }
     .item-qty { font-size: 13px; font-weight: bold; }
 
-    .delete-item {
-      margin-left: auto;
-      background: none;
-      border: none;
-      color: #999;
-      cursor: pointer;
-      font-size: 12px;
-      text-decoration: underline;
-    }
+    .delete-item { margin-left: auto; background: none; border: none; color: #999; cursor: pointer; font-size: 12px; text-decoration: underline; }
     .delete-item:hover { color: #e44d26; }
 
-    /* 購物車下方的收件表單與結帳按鈕 */
-    .cart-footer {
-      padding: 20px;
-      border-top: 1px solid #eee;
-      background: #fafafa;
-    }
-    
-    .checkout-form {
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
-    }
-    .form-group {
-      margin-bottom: 10px;
-    }
-    .form-group label {
-      font-size: 12px;
-      display: block;
-      margin-bottom: 3px;
-      color: #555;
-      font-weight: 500;
-    }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 13px;
-      background: #fff;
-    }
-    .form-group textarea {
-      height: 55px;
-      resize: none;
-    }
-
-    .cart-total-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 15px;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
+    .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #fafafa; }
+    .cart-total-row { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; }
     .cart-total-price { color: #e44d26; font-size: 18px; }
     
     .checkout-btn {
@@ -370,35 +249,101 @@
     }
     .checkout-btn:hover { background: #444; }
 
-    /* 自訂通知 Modal 彈窗 */
+    /* ================= 填寫收件資訊的 Modal 彈窗樣式 ================= */
+    .checkout-modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .checkout-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .checkout-modal {
+      background: #fff;
+      width: 90%;
+      max-width: 450px;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .checkout-modal-overlay.active .checkout-modal {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .modal-header h3 { font-size: 16px; font-weight: bold; }
+    .close-modal { background: none; border: none; font-size: 22px; cursor: pointer; color: #888; }
+    .close-modal:hover { color: #000; }
+
+    .form-group { margin-bottom: 15px; }
+    .form-group label { font-size: 12px; display: block; margin-bottom: 4px; color: #555; font-weight: 500; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .form-group textarea { height: 70px; resize: none; }
+
+    .submit-order-btn {
+      width: 100%;
+      background: #e44d26;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    .submit-order-btn:hover { background: #c83b17; }
+
+    /* Toast 通知 */
     .custom-toast {
       position: fixed;
-      bottom: 20px;
-      left: 50%;
+      bottom: 20px; left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: rgba(0,0,0,0.85);
       color: #fff;
       padding: 12px 24px;
       border-radius: 30px;
       font-size: 14px;
-      z-index: 2000;
+      z-index: 3000;
       opacity: 0;
       transition: all 0.3s ease;
       pointer-events: none;
     }
-    .custom-toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    .custom-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-    /* 頁尾與 IG 連結 */
     footer { text-align: center; padding: 40px 20px; font-size: 12px; color: #888; background: #fff; margin-top: 60px; border-top: 1px solid #eee; }
     .social-links { margin-bottom: 15px; }
     .social-icon { display: inline-flex; align-items: center; justify-content: center; color: #333; text-decoration: none; transition: opacity 0.3s; }
     .social-icon:hover { opacity: 0.7; }
     .social-icon svg { width: 28px; height: 28px; fill: currentColor; }
 
-    /* 手機版隱藏箭頭 */
     @media (max-width: 768px) {
       .nav-btn { display: none !important; }
     }
@@ -422,7 +367,6 @@
     <h2 class="section-title">NEW ARRIVALS</h2>
     
     <div class="product-grid">
-      
       <!-- 商品 1 -->
       <div class="product-card" data-product-id="1">
         <div class="slider-container">
@@ -442,22 +386,13 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-
-          <!-- 圓形顏色選塊 -->
           <div class="color-section">
             <div class="color-label" id="color-label-1">カラー: White</div>
             <div class="color-swatches">
-              <button class="swatch-btn active" 
-                      style="background-color: #ffffff;" 
-                      title="White"
-                      onclick="selectColor(1, 'White', 0, 'Ladies Blue Sunflower Zip Hoodie White1.jpg', this)"></button>
-              <button class="swatch-btn" 
-                      style="background-color: #111111;" 
-                      title="Black"
-                      onclick="selectColor(1, 'Black', 2, 'Ladies Blue Sunflower Zip Hoodie Black1.jpg', this)"></button>
+              <button class="swatch-btn active" style="background-color: #ffffff;" title="White" onclick="selectColor(1, 'White', 0, 'Ladies Blue Sunflower Zip Hoodie White1.jpg', this)"></button>
+              <button class="swatch-btn" style="background-color: #111111;" title="Black" onclick="selectColor(1, 'Black', 2, 'Ladies Blue Sunflower Zip Hoodie Black1.jpg', this)"></button>
             </div>
           </div>
-
           <button class="buy-btn" onclick="addToCart('Ladies Blue Sunflower Zip Hoodie', 12000, 1, 'slider-1')">カートに追加</button>
         </div>
       </div>
@@ -515,22 +450,13 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-
-          <!-- 圓形顏色選塊 -->
           <div class="color-section">
             <div class="color-label" id="color-label-4">カラー: Blue</div>
             <div class="color-swatches">
-              <button class="swatch-btn active" 
-                      style="background-color: #3b82f6;" 
-                      title="Blue"
-                      onclick="selectColor(4, 'Blue', 0, 'Bear Edition Zip Hoodie Blue.jpg', this)"></button>
-              <button class="swatch-btn" 
-                      style="background-color: #ec4899;" 
-                      title="Pink"
-                      onclick="selectColor(4, 'Pink', 1, 'Bear Edition Zip Hoodie Pink.jpg', this)"></button>
+              <button class="swatch-btn active" style="background-color: #3b82f6;" title="Blue" onclick="selectColor(4, 'Blue', 0, 'Bear Edition Zip Hoodie Blue.jpg', this)"></button>
+              <button class="swatch-btn" style="background-color: #ec4899;" title="Pink" onclick="selectColor(4, 'Pink', 1, 'Bear Edition Zip Hoodie Pink.jpg', this)"></button>
             </div>
           </div>
-
           <button class="buy-btn" onclick="addToCart('Bear Edition Zip Hoodie', 12000, 4, 'slider-4')">カートに追加</button>
         </div>
       </div>
@@ -551,28 +477,36 @@
     </div>
     
     <div class="cart-footer">
-      <!-- 收件人資料填寫表單 -->
-      <div class="checkout-form">
-        <div style="font-size: 13px; font-weight: bold; margin-bottom: 8px; color: #333;">お届け先情報 (配送資訊)</div>
-        <div class="form-group">
-          <label>お名前 (お名前) *</label>
-          <input type="text" id="custName" placeholder="山田 太郎">
-        </div>
-        <div class="form-group">
-          <label>電話番号 (電話) *</label>
-          <input type="tel" id="custPhone" placeholder="090-1234-5678">
-        </div>
-        <div class="form-group">
-          <label>ご住所 (ご住所) *</label>
-          <textarea id="custAddress" placeholder="東京都渋谷区..."></textarea>
-        </div>
-      </div>
-
       <div class="cart-total-row">
         <span>合計 (税込):</span>
         <span class="cart-total-price" id="cartTotal">¥0</span>
       </div>
-      <button class="checkout-btn" onclick="checkout()">Instagramで注文を送信する</button>
+      <button class="checkout-btn" onclick="openCheckoutModal()">ご購入手続きへ (前往結帳)</button>
+    </div>
+  </div>
+
+  <!-- 獨立的收件資訊填寫彈窗 (Checkout Modal) -->
+  <div class="checkout-modal-overlay" id="checkoutModalOverlay" onclick="closeCheckoutModalOnOutside(event)">
+    <div class="checkout-modal">
+      <div class="modal-header">
+        <h3>お届け先情報の入力</h3>
+        <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
+      </div>
+      
+      <div class="form-group">
+        <label>お名前 (お名前) *</label>
+        <input type="text" id="custName" placeholder="山田 太郎">
+      </div>
+      <div class="form-group">
+        <label>電話番号 (電話) *</label>
+        <input type="tel" id="custPhone" placeholder="090-1234-5678">
+      </div>
+      <div class="form-group">
+        <label>ご住所 (ご住所) *</label>
+        <textarea id="custAddress" placeholder="東京都渋谷区..."></textarea>
+      </div>
+
+      <button class="submit-order-btn" onclick="sendOrderToInstagram()">Instagramで注文を送信する</button>
     </div>
   </div>
 
@@ -739,13 +673,32 @@
       }, 3000);
     }
 
-    // 點擊結帳：驗證收件資訊、打包訂單並開啟 IG DM
-    function checkout() {
+    // 1. 點擊購物車內的「前往結帳」按鈕
+    function openCheckoutModal() {
       if (cart.length === 0) {
         showToast('カートが空です。');
         return;
       }
+      // 關閉購物車抽屜
+      toggleCart();
+      // 打開收件資訊填寫彈窗
+      document.getElementById('checkoutModalOverlay').classList.add('active');
+    }
 
+    // 2. 關閉收件資訊彈窗
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModalOverlay').classList.remove('active');
+    }
+
+    // 點擊彈窗外部背景可關閉
+    function closeCheckoutModalOnOutside(event) {
+      if (event.target.id === 'checkoutModalOverlay') {
+        closeCheckoutModal();
+      }
+    }
+
+    // 3. 填寫完收件資訊後，點擊確認送出 -> 打包並跳轉到 IG DM
+    function sendOrderToInstagram() {
       const name = document.getElementById('custName').value.trim();
       const phone = document.getElementById('custPhone').value.trim();
       const address = document.getElementById('custAddress').value.trim();
@@ -776,12 +729,11 @@
         `よろしくお願いいたします！`;
 
       const encodedMessage = encodeURIComponent(message);
-      
-      // ⚠️ 如果您的 IG 帳號名稱有更改，可以在這裡調整
       const igUsername = 'maison_bear__'; 
       const igUrl = `https://ig.me/m/${igUsername}?text=${encodedMessage}`;
       
       window.open(igUrl, '_blank');
+      closeCheckoutModal();
     }
   </script>
 
