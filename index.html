@@ -24,7 +24,7 @@
     .header-placeholder { width: 40px; }
     .site-logo { max-height: 80px; width: auto; object-fit: contain; }
     
-    /* 購物車圖標與 Badge */
+    /* 購物車圖標與 Badge (保持紅色) */
     .cart-trigger {
       position: relative;
       background: none;
@@ -37,14 +37,14 @@
       color: #333;
       transition: color 0.2s;
     }
-    .cart-trigger:hover { color: #222; }
+    .cart-trigger:hover { color: #e44d26; }
     .cart-trigger svg { width: 26px; height: 26px; fill: currentColor; }
     
     .cart-badge {
       position: absolute;
       top: 2px;
       right: 2px;
-      background-color: #222; /* 購物車小紅點改為黑色高質感 Badge */
+      background-color: #e44d26; /* 恢復為紅色 */
       color: #fff;
       font-size: 11px;
       font-weight: bold;
@@ -136,7 +136,7 @@
     }
     
     .product-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; }
-    .product-price { color: #222; font-weight: 600; font-size: 17px; margin-bottom: 12px; } /* 改為沉穩黑色 */
+    .product-price { color: #222; font-weight: 600; font-size: 17px; margin-bottom: 12px; } /* 價格維持沉穩黑色 */
     .product-desc { font-size: 13px; color: #666; margin-bottom: 15px; }
     
     .color-section { margin-bottom: 15px; }
@@ -221,7 +221,7 @@
     .cart-item-details { flex: 1; }
     .cart-item-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
     .cart-item-variant { font-size: 12px; color: #777; margin-bottom: 4px; }
-    .cart-item-price { font-size: 14px; color: #222; font-weight: bold; margin-bottom: 8px; } /* 改為沉穩黑色 */
+    .cart-item-price { font-size: 14px; color: #222; font-weight: bold; margin-bottom: 8px; }
 
     .cart-item-actions { display: flex; align-items: center; gap: 10px; }
     .qty-btn { width: 24px; height: 24px; border: 1px solid #ccc; background: #fff; border-radius: 3px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
@@ -233,11 +233,11 @@
 
     .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #fafafa; }
     .cart-total-row { display: flex; justify-content: space-between; font-size: 15px; font-weight: bold; margin-bottom: 12px; }
-    .cart-total-price { color: #222; font-size: 18px; } /* 改為沉穩黑色 */
+    .cart-total-price { color: #222; font-size: 18px; }
     
     .checkout-btn {
       width: 100%;
-      background: #222;
+      background: #e44d26; /* 恢復為紅色結帳按鈕 */
       color: #fff;
       border: none;
       padding: 14px;
@@ -247,7 +247,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .checkout-btn:hover { background: #444; }
+    .checkout-btn:hover { background: #c83b17; }
 
     /* ================= 填寫收件資訊的 Modal 彈窗樣式 ================= */
     .checkout-modal-overlay {
@@ -308,7 +308,7 @@
 
     .submit-order-btn {
       width: 100%;
-      background: #222; /* 結帳送出按鈕統一為黑色風格 */
+      background: #e44d26; /* 恢復為紅色送出按鈕 */
       color: #fff;
       border: none;
       padding: 14px;
@@ -319,7 +319,7 @@
       transition: background 0.3s;
       margin-top: 10px;
     }
-    .submit-order-btn:hover { background: #444; }
+    .submit-order-btn:hover { background: #c83b17; }
 
     /* Toast 通知 */
     .custom-toast {
