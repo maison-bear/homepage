@@ -494,15 +494,15 @@
       </div>
       
       <div class="form-group">
-        <label>お名前 (お名前) *</label>
+        <label>お名前 *</label>
         <input type="text" id="custName" placeholder="山田 太郎">
       </div>
       <div class="form-group">
-        <label>電話番号 (電話) *</label>
+        <label>電話番号 *</label>
         <input type="tel" id="custPhone" placeholder="090-1234-5678">
       </div>
       <div class="form-group">
-        <label>ご住所 (ご住所) *</label>
+        <label>ご住所 *</label>
         <textarea id="custAddress" placeholder="東京都渋谷区..."></textarea>
       </div>
 
@@ -727,7 +727,7 @@
 
       // 使用剪貼簿 API 自動複製文字
       navigator.clipboard.writeText(message).then(() => {
-        alert('注文内容をコピーしました！\nInstagramが開いたら、DMのメッセージ欄にペースト（貼り付け）して送信してください。\n\n(訂單內容已複製！開啟 IG 後請直接在私訊貼上送出！)');
+        alert('注文内容をコピーしました！\nInstagramが開いたら、DMのメッセージ欄にペースト（貼り付け）して送信してください。');
         
         const appUrl = `instagram://user?username=${igUsername}`;
         const webUrl = `https://ig.me/m/${igUsername}`;
