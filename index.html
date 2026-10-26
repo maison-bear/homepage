@@ -174,13 +174,11 @@
       transform: scale(1.1);
     }
 
-    /* 選中狀態的外圈黑框效果 */
     .swatch-btn.active {
       border: 2px solid #000;
       box-shadow: 0 0 0 2px #fff inset;
     }
 
-    /* 加入購物車按鈕 (齊平底部) */
     .buy-btn { 
       margin-top: auto; 
       display: block; 
@@ -261,7 +259,7 @@
     .empty-cart {
       text-align: center;
       color: #999;
-      margin-top: 60px;
+      margin-top: 40px;
       font-size: 14px;
     }
 
@@ -314,22 +312,53 @@
     }
     .delete-item:hover { color: #e44d26; }
 
+    /* 購物車下方的收件表單與結帳按鈕 */
     .cart-footer {
       padding: 20px;
       border-top: 1px solid #eee;
       background: #fafafa;
     }
+    
+    .checkout-form {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+    .form-group label {
+      font-size: 12px;
+      display: block;
+      margin-bottom: 3px;
+      color: #555;
+      font-weight: 500;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+      background: #fff;
+    }
+    .form-group textarea {
+      height: 55px;
+      resize: none;
+    }
+
     .cart-total-row {
       display: flex;
       justify-content: space-between;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
-    .cart-total-price { color: #e44d26; font-size: 20px; }
+    .cart-total-price { color: #e44d26; font-size: 18px; }
+    
     .checkout-btn {
       width: 100%;
-      background: #e44d26;
+      background: #222;
       color: #fff;
       border: none;
       padding: 14px;
@@ -339,13 +368,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .checkout-btn:hover { background: #c83b17; }
-    .shipping-note {
-      text-align: center;
-      font-size: 11px;
-      color: #888;
-      margin-top: 10px;
-    }
+    .checkout-btn:hover { background: #444; }
 
     /* 自訂通知 Modal 彈窗 */
     .custom-toast {
@@ -374,6 +397,11 @@
     .social-icon { display: inline-flex; align-items: center; justify-content: center; color: #333; text-decoration: none; transition: opacity 0.3s; }
     .social-icon:hover { opacity: 0.7; }
     .social-icon svg { width: 28px; height: 28px; fill: currentColor; }
+
+    /* 手機版隱藏箭頭 */
+    @media (max-width: 768px) {
+      .nav-btn { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -523,11 +551,28 @@
     </div>
     
     <div class="cart-footer">
+      <!-- 收件人資料填寫表單 -->
+      <div class="checkout-form">
+        <div style="font-size: 13px; font-weight: bold; margin-bottom: 8px; color: #333;">お届け先情報 (配送資訊)</div>
+        <div class="form-group">
+          <label>お名前 (お名前) *</label>
+          <input type="text" id="custName" placeholder="山田 太郎">
+        </div>
+        <div class="form-group">
+          <label>電話番号 (電話) *</label>
+          <input type="tel" id="custPhone" placeholder="090-1234-5678">
+        </div>
+        <div class="form-group">
+          <label>ご住所 (ご住所) *</label>
+          <textarea id="custAddress" placeholder="東京都渋谷区..."></textarea>
+        </div>
+      </div>
+
       <div class="cart-total-row">
         <span>合計 (税込):</span>
         <span class="cart-total-price" id="cartTotal">¥0</span>
       </div>
-      <button class="checkout-btn" onclick="checkout()">ご購入手続きへ</button>
+      <button class="checkout-btn" onclick="checkout()">Instagramで注文を送信する</button>
     </div>
   </div>
 
@@ -549,13 +594,11 @@
   <!-- 購物車與選色邏輯腳本 -->
   <script>
     let cart = [];
-    // 記錄有顏色選單商品的當前選中狀態
     const selectedVariants = {
       1: { color: 'White', imgSrc: 'Ladies Blue Sunflower Zip Hoodie White1.jpg' },
       4: { color: 'Blue', imgSrc: 'Bear Edition Zip Hoodie Blue.jpg' }
     };
 
-    // 點擊箭頭切換圖檔
     function moveSlide(button, direction) {
       const container = button.parentElement;
       const slider = container.querySelector('.slider');
@@ -563,27 +606,22 @@
       slider.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
     }
 
-    // 點擊顏色圓圈選塊 (Color Swatch)
     function selectColor(productId, colorName, slideIndex, imgSrc, btnElement) {
-      // 1. 更新選中的顏色數據
       selectedVariants[productId] = {
         color: colorName,
         imgSrc: imgSrc
       };
 
-      // 2. 更新標題文字 (例如 "カラー: White")
       const label = document.getElementById(`color-label-${productId}`);
       if (label) {
         label.textContent = `カラー: ${colorName}`;
       }
 
-      // 3. 更新按鈕選中樣式 (Highlight active swatch)
       const parentContainer = btnElement.parentElement;
       const buttons = parentContainer.querySelectorAll('.swatch-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
       btnElement.classList.add('active');
 
-      // 4. 切換圖片輪播至對應的 index
       const slider = document.getElementById(`slider-${productId}`);
       if (slider && !isNaN(slideIndex)) {
         const slideWidth = slider.clientWidth;
@@ -591,13 +629,11 @@
       }
     }
 
-    // 切換 Drawer 開關
     function toggleCart() {
       document.getElementById('cartOverlay').classList.toggle('active');
       document.getElementById('cartDrawer').classList.toggle('active');
     }
 
-    // 加入購物車
     function addToCart(title, price, productId, sliderId) {
       let variant = '';
       let imgSrc = '';
@@ -635,7 +671,6 @@
       toggleCart();
     }
 
-    // 更新數量
     function updateQty(id, change) {
       const item = cart.find(item => item.id === id);
       if (item) {
@@ -647,13 +682,11 @@
       updateCartUI();
     }
 
-    // 移除商品
     function removeFromCart(id) {
       cart = cart.filter(item => item.id !== id);
       updateCartUI();
     }
 
-    // 渲染購物車介面與計算總額
     function updateCartUI() {
       const cartItemsContainer = document.getElementById('cartItems');
       const cartBadge = document.getElementById('cartBadge');
@@ -697,7 +730,6 @@
       cartTotal.textContent = `¥${totalPrice.toLocaleString()}`;
     }
 
-    // Toast 通知
     function showToast(message) {
       const toast = document.getElementById('toast');
       toast.textContent = message;
@@ -707,13 +739,49 @@
       }, 3000);
     }
 
-    // 結帳提示
+    // 點擊結帳：驗證收件資訊、打包訂單並開啟 IG DM
     function checkout() {
       if (cart.length === 0) {
         showToast('カートが空です。');
         return;
       }
-      showToast('ご注文手続きへ進みます。Instagram DMにてご注文内容をご連絡ください！');
+
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const address = document.getElementById('custAddress').value.trim();
+
+      if (!name || !phone || !address) {
+        showToast('お届け先情報をすべて入力してください。');
+        return;
+      }
+
+      let totalPrice = 0;
+      let itemsText = '';
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.qty;
+        totalPrice += subtotal;
+        itemsText += `${index + 1}. ${item.title} ${item.variant ? '(' + item.variant + ')' : ''} x ${item.qty} - ¥${subtotal.toLocaleString()}\n`;
+      });
+
+      const message = 
+        `【新規注文】\n\n` +
+        `--- 注文商品 ---\n` +
+        itemsText + `\n` +
+        `合計金額: ¥${totalPrice.toLocaleString()} (税込)\n\n` +
+        `--- お届け先 ---\n` +
+        `お名前: ${name}\n` +
+        `電話番号: ${phone}\n` +
+        `ご住所: ${address}\n\n` +
+        `よろしくお願いいたします！`;
+
+      const encodedMessage = encodeURIComponent(message);
+      
+      // ⚠️ 如果您的 IG 帳號名稱有更改，可以在這裡調整
+      const igUsername = 'maison_bear__'; 
+      const igUrl = `https://ig.me/m/${igUsername}?text=${encodedMessage}`;
+      
+      window.open(igUrl, '_blank');
     }
   </script>
 
