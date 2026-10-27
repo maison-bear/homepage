@@ -22,7 +22,7 @@
     }
     
     .header-placeholder { width: 40px; }
-    .site-logo { max-height: 80px; width: auto; object-fit: contain; }
+    .site-logo { max-height: 150px; width: auto; object-fit: contain; }
     
     /* 購物車圖標與 Badge (保持紅色) */
     .cart-trigger {
@@ -44,7 +44,7 @@
       position: absolute;
       top: 2px;
       right: 2px;
-      background-color: #e44d26; /* 恢復為紅色 */
+      background-color: #e44d26;
       color: #fff;
       font-size: 11px;
       font-weight: bold;
@@ -136,7 +136,7 @@
     }
     
     .product-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; }
-    .product-price { color: #222; font-weight: 600; font-size: 17px; margin-bottom: 12px; } /* 價格維持沉穩黑色 */
+    .product-price { color: #222; font-weight: 600; font-size: 17px; margin-bottom: 12px; }
     .product-desc { font-size: 13px; color: #666; margin-bottom: 15px; }
     
     .color-section { margin-bottom: 15px; }
@@ -237,7 +237,7 @@
     
     .checkout-btn {
       width: 100%;
-      background: #e44d26; /* 恢復為紅色結帳按鈕 */
+      background: #e44d26;
       color: #fff;
       border: none;
       padding: 14px;
@@ -308,7 +308,7 @@
 
     .submit-order-btn {
       width: 100%;
-      background: #e44d26; /* 恢復為紅色送出按鈕 */
+      background: #e44d26;
       color: #fff;
       border: none;
       padding: 14px;
@@ -461,6 +461,91 @@
         </div>
       </div>
 
+      <!-- 商品 5: Monochrome Sunflower Zip Hoodie -->
+      <div class="product-card">
+        <div class="slider-container">
+          <div class="slider" id="slider-5">
+            <img src="Monochrome Sunflower Zip Hoodie.jpg" alt="Monochrome Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Monochrome+Sunflower';">
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-title">Monochrome Sunflower Zip Hoodie</div>
+          <div class="product-price">¥12,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <button class="buy-btn" onclick="addToCart('Monochrome Sunflower Zip Hoodie', 12000, null, 'slider-5')">カートに追加</button>
+        </div>
+      </div>
+
+      <!-- 商品 6: Longing Flower Zip Hoodie -->
+      <div class="product-card" data-product-id="6">
+        <div class="slider-container">
+          <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
+          <div class="slider" id="slider-6">
+            <img src="Longing Flower Zip Hoodie1.jpg" alt="Longing Flower Zip Hoodie 1" onerror="this.src='https://placehold.co/400x400/dbeafe/1e40af?text=Longing+Flower+1';">
+            <img src="Longing Flower Zip Hoodie2.jpg" alt="Longing Flower Zip Hoodie 2" onerror="this.src='https://placehold.co/400x400/fce7f3/9d174d?text=Longing+Flower+2';">
+          </div>
+          <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
+        </div>
+        <div class="product-info">
+          <div class="product-title">Longing Flower Zip Hoodie</div>
+          <div class="product-price">¥12,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <button class="buy-btn" onclick="addToCart('Longing Flower Zip Hoodie', 12000, null, 'slider-6')">カートに追加</button>
+        </div>
+      </div>
+
+      <!-- 商品 7: Sunflower Zip Hoodie With Yellow Cord -->
+      <div class="product-card" data-product-id="7">
+        <div class="slider-container">
+          <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
+          <div class="slider" id="slider-7">
+            <img src="Sunflower Zip Hoodie With Yellow Cord White.jpg" alt="White" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=Cord+White';">
+            <img src="Sunflower Zip Hoodie With Yellow Cord Black.jpg" alt="Black" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Cord+Black';">
+          </div>
+          <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
+        </div>
+        <div class="product-info">
+          <div class="product-title">Sunflower Zip Hoodie With Yellow Cord</div>
+          <div class="product-price">¥12,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <div class="color-section">
+            <div class="color-label" id="color-label-7">カラー: White</div>
+            <div class="color-swatches">
+              <button class="swatch-btn active" style="background-color: #ffffff;" title="White" onclick="selectColor(7, 'White', 0, 'Sunflower Zip Hoodie With Yellow Cord White.jpg', this)"></button>
+              <button class="swatch-btn" style="background-color: #111111;" title="Black" onclick="selectColor(7, 'Black', 1, 'Sunflower Zip Hoodie With Yellow Cord Black.jpg', this)"></button>
+            </div>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Sunflower Zip Hoodie With Yellow Cord', 12000, 7, 'slider-7')">カートに追加</button>
+        </div>
+      </div>
+
+      <!-- 商品 8: Sunflower Zip Hoodie -->
+      <div class="product-card">
+        <div class="slider-container">
+          <div class="slider" id="slider-8">
+            <img src="Sunflower Zip Hoodie.jpg" alt="Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Zip+Hoodie';">
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-title">Sunflower Zip Hoodie</div>
+          <div class="product-price">¥12,000 (税込)</div>
+          <div class="product-desc">
+            身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
+            素材: 綿 100%
+          </div>
+          <button class="buy-btn" onclick="addToCart('Sunflower Zip Hoodie', 12000, null, 'slider-8')">カートに追加</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -530,7 +615,8 @@
     let cart = [];
     const selectedVariants = {
       1: { color: 'White', imgSrc: 'Ladies Blue Sunflower Zip Hoodie White1.jpg' },
-      4: { color: 'Blue', imgSrc: 'Bear Edition Zip Hoodie Blue.jpg' }
+      4: { color: 'Blue', imgSrc: 'Bear Edition Zip Hoodie Blue.jpg' },
+      7: { color: 'White', imgSrc: 'Sunflower Zip Hoodie With Yellow Cord White.jpg' }
     };
 
     function moveSlide(button, direction) {
@@ -725,7 +811,6 @@
 
       const igUsername = 'maison_bear__'; 
 
-      // 使用剪貼簿 API 自動複製文字
       navigator.clipboard.writeText(message).then(() => {
         alert('注文内容をコピーしました！\nInstagramが開いたら、DMのメッセージ欄にペースト（貼り付け）して送信してください。');
         
