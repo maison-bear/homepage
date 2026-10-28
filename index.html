@@ -610,7 +610,7 @@
         </div>
       </div>
 
-      <!-- 商品 12: Maison Bear Sweatshirt (修改價格為 ¥6,500) -->
+      <!-- 商品 12: Maison Bear Sweatshirt (¥6,500) -->
       <div class="product-card">
         <div class="slider-container">
           <div class="slider" id="slider-12">
@@ -628,7 +628,7 @@
         </div>
       </div>
 
-      <!-- 商品 13: Bear Painting Sunflower Long T-shirt (修改價格為 ¥7,500) -->
+      <!-- 商品 13: Bear Painting Sunflower Long T-shirt (¥7,500) -->
       <div class="product-card">
         <div class="slider-container">
           <div class="slider" id="slider-13">
@@ -719,6 +719,37 @@
       7: { color: 'White', imgSrc: 'Sunflower Zip Hoodie With Yellow Cord White.jpg' },
       9: { color: 'White', imgSrc: 'Sunflower Hoodie White.jpg' }
     };
+
+    // 自動監聽滾動以同步當前圖片與顏色
+    document.addEventListener("DOMContentLoaded", function() {
+      const sliders = document.querySelectorAll('.slider');
+      sliders.forEach(slider => {
+        slider.addEventListener('scroll', function() {
+          const productId = this.id.replace('slider-', '');
+          const slideWidth = this.clientWidth;
+          const index = Math.round(this.scrollLeft / slideWidth);
+          const images = this.querySelectorAll('img');
+          if (images[index]) {
+            const currentImgSrc = images[index].getAttribute('src');
+            // 如果產品有色塊按鈕，同步更新選取狀態
+            const card = this.closest('.product-card');
+            const swatches = card.querySelectorAll('.swatch-btn');
+            if (swatches.length > index) {
+              swatches.forEach(btn => btn.classList.remove('active'));
+              swatches[index].classList.add('active');
+              const colorName = swatches[index].getAttribute('title');
+              const label = card.querySelector(`#color-label-${productId}`);
+              if (label) label.textContent = `カラー: ${colorName}`;
+              
+              selectedVariants[productId] = {
+                color: colorName,
+                imgSrc: currentImgSrc
+              };
+            }
+          }
+        });
+      });
+    });
 
     function moveSlide(button, direction) {
       const container = button.parentElement;
