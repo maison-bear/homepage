@@ -139,7 +139,7 @@
     .product-price { color: #222; font-weight: 600; font-size: 17px; margin-bottom: 12px; }
     .product-desc { font-size: 13px; color: #666; margin-bottom: 15px; }
     
-    .color-section { margin-bottom: 15px; }
+    .color-section { margin-bottom: 12px; }
     .color-label { font-size: 13px; color: #555; margin-bottom: 8px; }
     .color-swatches { display: flex; gap: 10px; align-items: center; }
 
@@ -157,6 +157,22 @@
     }
     .swatch-btn:hover { transform: scale(1.1); }
     .swatch-btn.active { border: 2px solid #000; box-shadow: 0 0 0 2px #fff inset; }
+
+    /* 尺寸選擇樣式 */
+    .size-section { margin-bottom: 15px; }
+    .size-label { font-size: 13px; color: #555; margin-bottom: 6px; }
+    .size-select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+      background: #fff;
+      color: #333;
+      outline: none;
+      cursor: pointer;
+    }
+    .size-select:focus { border-color: #222; }
 
     .buy-btn { 
       margin-top: auto; 
@@ -387,12 +403,22 @@
               <button class="swatch-btn" style="background-color: #111111;" title="Black" onclick="selectColor(1, 'Black', 2, 'Ladies Blue Sunflower Zip Hoodie Black1.jpg', this)"></button>
             </div>
           </div>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-1">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
           <button class="buy-btn" onclick="addToCart('Ladies Blue Sunflower Zip Hoodie', 12000, 1, 'slider-1')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 2: Blue Sunflower Hoodie (¥11,000) -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="2">
         <div class="slider-container">
           <div class="slider" id="slider-2">
             <img src="Blue Sunflower Hoodie.jpg" alt="Blue Sunflower Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Hoodie';">
@@ -405,12 +431,22 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Blue Sunflower Hoodie', 11000, null, 'slider-2')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-2">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Blue Sunflower Hoodie', 11000, 2, 'slider-2')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 3: Blue Sunflower Zip Hoodie (¥15,000) -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="3">
         <div class="slider-container">
           <div class="slider" id="slider-3">
             <img src="Blue Sunflower Zip Hoodie.jpg" alt="Blue Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Zip+Hoodie';">
@@ -423,7 +459,17 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Blue Sunflower Zip Hoodie', 15000, null, 'slider-3')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-3">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Blue Sunflower Zip Hoodie', 15000, 3, 'slider-3')">カートに追加</button>
         </div>
       </div>
 
@@ -451,12 +497,22 @@
               <button class="swatch-btn" style="background-color: #ec4899;" title="Pink" onclick="selectColor(4, 'Pink', 1, 'Bear Edition Zip Hoodie Pink.jpg', this)"></button>
             </div>
           </div>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-4">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
           <button class="buy-btn" onclick="addToCart('Bear Edition Zip Hoodie', 15000, 4, 'slider-4')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 5: Monochrome Sunflower Zip Hoodie -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="5">
         <div class="slider-container">
           <div class="slider" id="slider-5">
             <img src="Monochrome Sunflower Zip Hoodie.jpg" alt="Monochrome Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Monochrome+Sunflower';">
@@ -469,7 +525,17 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Monochrome Sunflower Zip Hoodie', 12000, null, 'slider-5')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-5">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Monochrome Sunflower Zip Hoodie', 12000, 5, 'slider-5')">カートに追加</button>
         </div>
       </div>
 
@@ -490,7 +556,17 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Longing Flower Zip Hoodie', 12000, null, 'slider-6')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-6">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Longing Flower Zip Hoodie', 12000, 6, 'slider-6')">カートに追加</button>
         </div>
       </div>
 
@@ -500,7 +576,7 @@
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
           <div class="slider" id="slider-7">
             <img src="Sunflower Zip Hoodie With Yellow Cord White.jpg" alt="White" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=Cord+White';">
-            <img src="Sunflower Zip Hoodie With Yellow Cord Black.jpg" alt="Black" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black';">
+            <img src="Sunflower Zip Hoodie With Yellow Cord Black.jpg" alt="Black" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Cord+Black';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -518,12 +594,22 @@
               <button class="swatch-btn" style="background-color: #111111;" title="Black" onclick="selectColor(7, 'Black', 1, 'Sunflower Zip Hoodie With Yellow Cord Black.jpg', this)"></button>
             </div>
           </div>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-7">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
           <button class="buy-btn" onclick="addToCart('Sunflower Zip Hoodie With Yellow Cord', 12000, 7, 'slider-7')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 8: Sunflower Zip Hoodie (¥14,500) -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="8">
         <div class="slider-container">
           <div class="slider" id="slider-8">
             <img src="Sunflower Zip Hoodie.jpg" alt="Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Zip+Hoodie';">
@@ -536,11 +622,21 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Sunflower Zip Hoodie', 14500, null, 'slider-8')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-8">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Sunflower Zip Hoodie', 14500, 8, 'slider-8')">カートに追加</button>
         </div>
       </div>
 
-      <!-- 商品 9: Sunflower Hoodie (支持 White / Black 雙色切換) -->
+      <!-- 商品 9: Sunflower Hoodie (White / Black) -->
       <div class="product-card" data-product-id="9">
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
@@ -564,12 +660,22 @@
               <button class="swatch-btn" style="background-color: #111111;" title="Black" onclick="selectColor(9, 'Black', 1, 'Sunflower Hoodie.jpg', this)"></button>
             </div>
           </div>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-9">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
           <button class="buy-btn" onclick="addToCart('Sunflower Hoodie', 9500, 9, 'slider-9')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 10: Sunflower Maison Bear Sweatshirt (¥7,500) -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="10">
         <div class="slider-container">
           <div class="slider" id="slider-10">
             <img src="Sunflower Maison Bear Sweatshirt.jpg" alt="Sunflower Maison Bear Sweatshirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Maison+Bear+Sweatshirt';">
@@ -582,15 +688,25 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Sunflower Maison Bear Sweatshirt', 7500, null, 'slider-10')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-10">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Sunflower Maison Bear Sweatshirt', 7500, 10, 'slider-10')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 11: Sunflower Long T-Shirt (¥6,500) -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="11">
         <div class="slider-container">
           <div class="slider" id="slider-11">
-            <img src="Sunflower Long T-shirt.jpg" alt="Sunflower Long T-Shirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Long+T-Shirt';">
+            <img src="Sunflower Long T-Shirt.jpg" alt="Sunflower Long T-Shirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Long+T-Shirt';">
           </div>
         </div>
         <div class="product-info">
@@ -600,12 +716,22 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Sunflower Long T-Shirt', 6500, null, 'slider-11')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-11">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Sunflower Long T-Shirt', 6500, 11, 'slider-11')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 12: Maison Bear Sweatshirt (¥6,500) -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="12">
         <div class="slider-container">
           <div class="slider" id="slider-12">
             <img src="Maison Bear Sweatshirt.jpg" alt="Maison Bear Sweatshirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Maison+Bear+Sweatshirt';">
@@ -618,12 +744,22 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Maison Bear Sweatshirt', 6500, null, 'slider-12')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-12">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Maison Bear Sweatshirt', 6500, 12, 'slider-12')">カートに追加</button>
         </div>
       </div>
 
       <!-- 商品 13: Bear Painting Sunflower Long T-shirt (¥7,500) -->
-      <div class="product-card">
+      <div class="product-card" data-product-id="13">
         <div class="slider-container">
           <div class="slider" id="slider-13">
             <img src="Bear Painting Sunflower Long T-shirt.jpg" alt="Bear Painting Sunflower Long T-shirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Bear+Painting+Sunflower+Long+T-shirt';">
@@ -636,7 +772,17 @@
             身幅: 58cm / 着丈: 72cm / 肩幅: 52cm<br>
             素材: 綿 100%
           </div>
-          <button class="buy-btn" onclick="addToCart('Bear Painting Sunflower Long T-shirt', 7500, null, 'slider-13')">カートに追加</button>
+          <div class="size-section">
+            <div class="size-label">サイズ</div>
+            <select class="size-select" id="size-13">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="addToCart('Bear Painting Sunflower Long T-shirt', 7500, 13, 'slider-13')">カートに追加</button>
         </div>
       </div>
 
@@ -726,13 +872,11 @@
         imgSrc: imgSrc
       };
 
-      // 即時更新「カラー: XX」標籤
       const label = document.getElementById(`color-label-${productId}`);
       if (label) {
         label.textContent = `カラー: ${colorName}`;
       }
 
-      // 切換 swatch 高亮狀態
       if (btnElement) {
         const parentContainer = btnElement.parentElement;
         const buttons = parentContainer.querySelectorAll('.swatch-btn');
@@ -740,7 +884,6 @@
         btnElement.classList.add('active');
       }
 
-      // 將圖片輪播切換至相應張數
       const slider = document.getElementById(`slider-${productId}`);
       if (slider && !isNaN(slideIndex)) {
         const slideWidth = slider.clientWidth;
@@ -754,11 +897,11 @@
     }
 
     function addToCart(title, price, productId, sliderId) {
-      let variant = '';
+      let colorVariant = '';
       let imgSrc = '';
 
-      if (productId && selectedVariants[productId]) {
-        variant = selectedVariants[productId].color;
+      if (selectedVariants[productId]) {
+        colorVariant = selectedVariants[productId].color;
         imgSrc = selectedVariants[productId].imgSrc;
       }
 
@@ -770,7 +913,14 @@
         }
       }
 
-      const cartItemId = `${title}-${variant}`;
+      // 取得選擇的 Size
+      const sizeSelect = document.getElementById(`size-${productId}`);
+      const sizeVariant = sizeSelect ? sizeSelect.value : 'L';
+
+      // 組合變體名稱（包含顏色與尺寸，若無顏色則只顯示尺寸）
+      let variantText = colorVariant ? `${colorVariant} / Size: ${sizeVariant}` : `Size: ${sizeVariant}`;
+      const cartItemId = `${title}-${colorVariant}-${sizeVariant}`;
+      
       const existingItem = cart.find(item => item.id === cartItemId);
 
       if (existingItem) {
@@ -780,7 +930,7 @@
           id: cartItemId,
           title: title,
           price: price,
-          variant: variant,
+          variant: variantText,
           imgSrc: imgSrc,
           qty: 1
         });
@@ -832,7 +982,7 @@
             <img src="${item.imgSrc}" alt="${item.title}" onerror="this.src='https://placehold.co/100x100/eeeeee/888888?text=Item';">
             <div class="cart-item-details">
               <div class="cart-item-title">${item.title}</div>
-              ${item.variant ? `<div class="cart-item-variant">Color: ${item.variant}</div>` : ''}
+              ${item.variant ? `<div class="cart-item-variant">${item.variant}</div>` : ''}
               <div class="cart-item-price">¥${item.price.toLocaleString()}</div>
               <div class="cart-item-actions">
                 <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
@@ -893,7 +1043,7 @@
       cart.forEach((item, index) => {
         const subtotal = item.price * item.qty;
         totalPrice += subtotal;
-        itemsText += `${index + 1}. ${item.title} ${item.variant ? '(' + item.variant + ')' : ''} x ${item.qty} - ¥${subtotal.toLocaleString()}\n`;
+        itemsText += `${index + 1}. ${item.title} (${item.variant}) x ${item.qty} - ¥${subtotal.toLocaleString()}\n`;
       });
 
       const message = 
