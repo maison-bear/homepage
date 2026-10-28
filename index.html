@@ -24,7 +24,7 @@
     .header-placeholder { width: 40px; }
     .site-logo { max-height: 120px; width: auto; object-fit: contain; }
     
-    /* 購物車圖標與 Badge (保持紅色) */
+    /* 購物車圖標與 Badge */
     .cart-trigger {
       position: relative;
       background: none;
@@ -175,7 +175,7 @@
     }
     .buy-btn:hover { background: #444; }
     
-    /* 購物車 Side Drawer */
+    /* 購物車 Drawer */
     .cart-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -249,7 +249,7 @@
     }
     .checkout-btn:hover { background: #c83b17; }
 
-    /* ================= 填寫收件資訊的 Modal 彈窗樣式 ================= */
+    /* Modal 彈窗樣式 */
     .checkout-modal-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -263,10 +263,7 @@
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    .checkout-modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .checkout-modal-overlay.active { opacity: 1; visibility: visible; }
 
     .checkout-modal {
       background: #fff;
@@ -278,9 +275,7 @@
       transform: translateY(20px);
       transition: transform 0.3s ease;
     }
-    .checkout-modal-overlay.active .checkout-modal {
-      transform: translateY(0);
-    }
+    .checkout-modal-overlay.active .checkout-modal { transform: translateY(0); }
 
     .modal-header {
       display: flex;
@@ -321,7 +316,6 @@
     }
     .submit-order-btn:hover { background: #c83b17; }
 
-    /* Toast 通知 */
     .custom-toast {
       position: fixed;
       bottom: 20px; left: 50%;
@@ -357,7 +351,7 @@
     <img src="LOGO.jpg" alt="Logo" class="site-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x80/ffffff/333333?text=LOGO';">
     <button class="cart-trigger" onclick="toggleCart()" aria-label="Shopping Cart">
       <svg viewBox="0 0 24 24">
-        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
       </svg>
       <span class="cart-badge" id="cartBadge">0</span>
     </button>
@@ -367,7 +361,7 @@
     <h2 class="section-title">NEW ARRIVALS</h2>
     
     <div class="product-grid">
-      <!-- 商品 1 -->
+      <!-- 商品 1: Ladies Blue Sunflower Zip Hoodie -->
       <div class="product-card" data-product-id="1">
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
@@ -506,7 +500,7 @@
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
           <div class="slider" id="slider-7">
             <img src="Sunflower Zip Hoodie With Yellow Cord White.jpg" alt="White" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=Cord+White';">
-            <img src="Sunflower Zip Hoodie With Yellow Cord Black.jpg" alt="Black" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Cord+Black';">
+            <img src="Sunflower Zip Hoodie With Yellow Cord Black.jpg" alt="Black" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -546,7 +540,7 @@
         </div>
       </div>
 
-      <!-- 商品 9: Sunflower Hoodie (White / Black) -->
+      <!-- 商品 9: Sunflower Hoodie (支持 White / Black 雙色切換) -->
       <div class="product-card" data-product-id="9">
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
@@ -670,7 +664,7 @@
     </div>
   </div>
 
-  <!-- 獨立的收件資訊填寫彈窗 (Checkout Modal) -->
+  <!-- Modal 彈窗 -->
   <div class="checkout-modal-overlay" id="checkoutModalOverlay" onclick="closeCheckoutModalOnOutside(event)">
     <div class="checkout-modal">
       <div class="modal-header">
@@ -695,10 +689,10 @@
     </div>
   </div>
 
-  <!-- Toast 訊息通知 -->
+  <!-- Toast 通知 -->
   <div class="custom-toast" id="toast"></div>
 
-  <!-- 頁尾聲明與 IG 連結 -->
+  <!-- 頁尾 -->
   <footer>
     <div class="social-links">
       <a href="https://instagram.com/maison_bear__" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
@@ -710,7 +704,6 @@
     <p>&copy; 2026. All rights reserved.</p>
   </footer>
 
-  <!-- 購物車與選色邏輯腳本 -->
   <script>
     let cart = [];
     const selectedVariants = {
@@ -719,37 +712,6 @@
       7: { color: 'White', imgSrc: 'Sunflower Zip Hoodie With Yellow Cord White.jpg' },
       9: { color: 'White', imgSrc: 'Sunflower Hoodie White.jpg' }
     };
-
-    // 自動監聽滾動以同步當前圖片與顏色
-    document.addEventListener("DOMContentLoaded", function() {
-      const sliders = document.querySelectorAll('.slider');
-      sliders.forEach(slider => {
-        slider.addEventListener('scroll', function() {
-          const productId = this.id.replace('slider-', '');
-          const slideWidth = this.clientWidth;
-          const index = Math.round(this.scrollLeft / slideWidth);
-          const images = this.querySelectorAll('img');
-          if (images[index]) {
-            const currentImgSrc = images[index].getAttribute('src');
-            // 如果產品有色塊按鈕，同步更新選取狀態
-            const card = this.closest('.product-card');
-            const swatches = card.querySelectorAll('.swatch-btn');
-            if (swatches.length > index) {
-              swatches.forEach(btn => btn.classList.remove('active'));
-              swatches[index].classList.add('active');
-              const colorName = swatches[index].getAttribute('title');
-              const label = card.querySelector(`#color-label-${productId}`);
-              if (label) label.textContent = `カラー: ${colorName}`;
-              
-              selectedVariants[productId] = {
-                color: colorName,
-                imgSrc: currentImgSrc
-              };
-            }
-          }
-        });
-      });
-    });
 
     function moveSlide(button, direction) {
       const container = button.parentElement;
@@ -764,16 +726,21 @@
         imgSrc: imgSrc
       };
 
+      // 即時更新「カラー: XX」標籤
       const label = document.getElementById(`color-label-${productId}`);
       if (label) {
         label.textContent = `カラー: ${colorName}`;
       }
 
-      const parentContainer = btnElement.parentElement;
-      const buttons = parentContainer.querySelectorAll('.swatch-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      btnElement.classList.add('active');
+      // 切換 swatch 高亮狀態
+      if (btnElement) {
+        const parentContainer = btnElement.parentElement;
+        const buttons = parentContainer.querySelectorAll('.swatch-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+      }
 
+      // 將圖片輪播切換至相應張數
       const slider = document.getElementById(`slider-${productId}`);
       if (slider && !isNaN(slideIndex)) {
         const slideWidth = slider.clientWidth;
@@ -910,7 +877,6 @@
       }
     }
 
-    // 點擊送出訂單：自動複製訂單到剪貼簿，並在手機上優先喚起 Instagram App
     function sendOrderToInstagram() {
       const name = document.getElementById('custName').value.trim();
       const phone = document.getElementById('custPhone').value.trim();
