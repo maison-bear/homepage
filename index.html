@@ -105,6 +105,7 @@
       scroll-snap-align: start;
       user-select: none;
       -webkit-user-drag: none;
+      cursor: zoom-in;
     }
 
     .nav-btn {
@@ -335,6 +336,91 @@
     }
     .submit-order-btn:hover { background: #c83b17; }
 
+    /* 圖片放大 Lightbox 燈箱（支援內部左右滑動） */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .lightbox-overlay.active { opacity: 1; visibility: visible; }
+    
+    .lightbox-container {
+      position: relative;
+      width: 90vw;
+      max-width: 700px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-slider {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      border-radius: 6px;
+    }
+    .lightbox-slider::-webkit-scrollbar { display: none; }
+
+    .lightbox-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: background 0.3s;
+      z-index: 3005;
+    }
+    .lightbox-nav-btn:hover { background: rgba(255, 255, 255, 0.7); color: #000; }
+    .lightbox-prev { left: -15px; }
+    .lightbox-next { right: -15px; }
+
+    .lightbox-close {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 36px;
+      cursor: pointer;
+      padding: 5px;
+      line-height: 1;
+      z-index: 3005;
+    }
+    .lightbox-close:hover { color: #ccc; }
+
     .custom-toast {
       position: fixed;
       bottom: 20px; left: 50%;
@@ -358,7 +444,7 @@
     .social-icon svg { width: 28px; height: 28px; fill: currentColor; }
 
     @media (max-width: 768px) {
-      .nav-btn { display: none !important; }
+      .nav-btn, .lightbox-nav-btn { display: none !important; }
     }
   </style>
 </head>
@@ -383,10 +469,10 @@
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
           <div class="slider" id="slider-1">
-            <img src="Ladies Blue Sunflower Zip Hoodie Black1.jpg" alt="Black Hoodie1" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black+1';">
-            <img src="Ladies Blue Sunflower Zip Hoodie Black2.jpg" alt="Black Hoodie2" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black+2';">
-            <img src="Ladies Blue Sunflower Zip Hoodie White1.jpg" alt="White Hoodie1" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White+1';">
-            <img src="Ladies Blue Sunflower Zip Hoodie White2.jpg" alt="White Hoodie2" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White+2';">
+            <img src="Ladies Blue Sunflower Zip Hoodie Black1.jpg" alt="Black Hoodie1" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black+1';">
+            <img src="Ladies Blue Sunflower Zip Hoodie Black2.jpg" alt="Black Hoodie2" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black+2';">
+            <img src="Ladies Blue Sunflower Zip Hoodie White1.jpg" alt="White Hoodie1" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White+1';">
+            <img src="Ladies Blue Sunflower Zip Hoodie White2.jpg" alt="White Hoodie2" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White+2';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -422,7 +508,7 @@
       <div class="product-card" data-product-id="2">
         <div class="slider-container">
           <div class="slider" id="slider-2">
-            <img src="Blue Sunflower Hoodie.jpg" alt="Blue Sunflower Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Hoodie';">
+            <img src="Blue Sunflower Hoodie.jpg" alt="Blue Sunflower Hoodie" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Hoodie';">
           </div>
         </div>
         <div class="product-info">
@@ -450,7 +536,7 @@
       <div class="product-card" data-product-id="3">
         <div class="slider-container">
           <div class="slider" id="slider-3">
-            <img src="Blue Sunflower Zip Hoodie.jpg" alt="Blue Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Zip+Hoodie';">
+            <img src="Blue Sunflower Zip Hoodie.jpg" alt="Blue Sunflower Zip Hoodie" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Blue+Sunflower+Zip+Hoodie';">
           </div>
         </div>
         <div class="product-info">
@@ -479,8 +565,8 @@
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
           <div class="slider" id="slider-4">
-            <img src="Bear Edition Zip Hoodie Blue.jpg" alt="Blue Hoodie" onerror="this.src='https://placehold.co/400x400/dbeafe/1e40af?text=Bear+Blue';">
-            <img src="Bear Edition Zip Hoodie Pink.jpg" alt="Pink Hoodie" onerror="this.src='https://placehold.co/400x400/fce7f3/9d174d?text=Bear+Pink';">
+            <img src="Bear Edition Zip Hoodie Blue.jpg" alt="Blue Hoodie" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/dbeafe/1e40af?text=Bear+Blue';">
+            <img src="Bear Edition Zip Hoodie Pink.jpg" alt="Pink Hoodie" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/fce7f3/9d174d?text=Bear+Pink';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -516,7 +602,7 @@
       <div class="product-card" data-product-id="5">
         <div class="slider-container">
           <div class="slider" id="slider-5">
-            <img src="Monochrome Sunflower Zip Hoodie.jpg" alt="Monochrome Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Monochrome+Sunflower';">
+            <img src="Monochrome Sunflower Zip Hoodie.jpg" alt="Monochrome Sunflower Zip Hoodie" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Monochrome+Sunflower';">
           </div>
         </div>
         <div class="product-info">
@@ -545,8 +631,8 @@
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
           <div class="slider" id="slider-6">
-            <img src="Longing Flower Zip Hoodie1.jpg" alt="Longing Flower Zip Hoodie 1" onerror="this.src='https://placehold.co/400x400/dbeafe/1e40af?text=Longing+Flower+1';">
-            <img src="Longing Flower Zip Hoodie2.jpg" alt="Longing Flower Zip Hoodie 2" onerror="this.src='https://placehold.co/400x400/fce7f3/9d174d?text=Longing+Flower+2';">
+            <img src="Longing Flower Zip Hoodie1.jpg" alt="Longing Flower Zip Hoodie 1" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/dbeafe/1e40af?text=Longing+Flower+1';">
+            <img src="Longing Flower Zip Hoodie2.jpg" alt="Longing Flower Zip Hoodie 2" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/fce7f3/9d174d?text=Longing+Flower+2';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -576,8 +662,8 @@
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
           <div class="slider" id="slider-7">
-            <img src="Sunflower Zip Hoodie With Yellow Cord Black.jpg" alt="Black" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black';">
-            <img src="Sunflower Zip Hoodie With Yellow Cord White.jpg" alt="White" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=Cord+White';">
+            <img src="Sunflower Zip Hoodie With Yellow Cord Black.jpg" alt="Black" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black';">
+            <img src="Sunflower Zip Hoodie With Yellow Cord White.jpg" alt="White" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=Cord+White';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -613,7 +699,7 @@
       <div class="product-card" data-product-id="8">
         <div class="slider-container">
           <div class="slider" id="slider-8">
-            <img src="Sunflower Zip Hoodie.jpg" alt="Sunflower Zip Hoodie" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Zip+Hoodie';">
+            <img src="Sunflower Zip Hoodie.jpg" alt="Sunflower Zip Hoodie" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Zip+Hoodie';">
           </div>
         </div>
         <div class="product-info">
@@ -642,8 +728,8 @@
         <div class="slider-container">
           <button class="nav-btn prev-btn" onclick="moveSlide(this, -1)">❮</button>
           <div class="slider" id="slider-9">
-            <img src="Sunflower Hoodie.jpg" alt="Black" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black';">
-            <img src="Sunflower Hoodie White.jpg" alt="White" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White';">
+            <img src="Sunflower Hoodie.jpg" alt="Black" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/222222/ffffff?text=Black';">
+            <img src="Sunflower Hoodie White.jpg" alt="White" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/ffffff/333333?text=White';">
           </div>
           <button class="nav-btn next-btn" onclick="moveSlide(this, 1)">❯</button>
         </div>
@@ -679,7 +765,7 @@
       <div class="product-card" data-product-id="10">
         <div class="slider-container">
           <div class="slider" id="slider-10">
-            <img src="Sunflower Maison Bear Sweatshirt.jpg" alt="Sunflower Maison Bear Sweatshirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Maison+Bear+Sweatshirt';">
+            <img src="Sunflower Maison Bear Sweatshirt.jpg" alt="Sunflower Maison Bear Sweatshirt" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Maison+Bear+Sweatshirt';">
           </div>
         </div>
         <div class="product-info">
@@ -707,7 +793,7 @@
       <div class="product-card" data-product-id="11">
         <div class="slider-container">
           <div class="slider" id="slider-11">
-            <img src="Sunflower Long T-shirt.jpg" alt="Sunflower Long T-Shirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Long+T-Shirt';">
+            <img src="Sunflower Long T-shirt.jpg" alt="Sunflower Long T-Shirt" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Sunflower+Long+T-Shirt';">
           </div>
         </div>
         <div class="product-info">
@@ -735,7 +821,7 @@
       <div class="product-card" data-product-id="12">
         <div class="slider-container">
           <div class="slider" id="slider-12">
-            <img src="Maison Bear Sweatshirt.jpg" alt="Maison Bear Sweatshirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Maison+Bear+Sweatshirt';">
+            <img src="Maison Bear Sweatshirt.jpg" alt="Maison Bear Sweatshirt" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Maison+Bear+Sweatshirt';">
           </div>
         </div>
         <div class="product-info">
@@ -763,7 +849,7 @@
       <div class="product-card" data-product-id="13">
         <div class="slider-container">
           <div class="slider" id="slider-13">
-            <img src="Bear Painting Sunflower Long T-shirt.jpg" alt="Bear Painting Sunflower Long T-shirt" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Bear+Painting+Sunflower+Long+T-shirt';">
+            <img src="Bear Painting Sunflower Long T-shirt.jpg" alt="Bear Painting Sunflower Long T-shirt" onclick="openLightbox(this)" onerror="this.src='https://placehold.co/400x400/e0f2fe/0369a1?text=Bear+Painting+Sunflower+Long+T-shirt';">
           </div>
         </div>
         <div class="product-info">
@@ -787,6 +873,18 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- 圖片放大 Lightbox 燈箱（支援左右滑動） -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightboxOnBg(event)">
+    <div class="lightbox-container" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <button class="lightbox-nav-btn lightbox-prev" onclick="moveLightboxSlide(-1)">❮</button>
+      <div class="lightbox-slider" id="lightboxSlider">
+        <!-- 動態填入該商品的所有圖片 -->
+      </div>
+      <button class="lightbox-nav-btn lightbox-next" onclick="moveLightboxSlide(1)">❯</button>
     </div>
   </div>
 
@@ -859,6 +957,51 @@
       7: { color: 'Black', imgSrc: 'Sunflower Zip Hoodie With Yellow Cord Black.jpg' },
       9: { color: 'Black', imgSrc: 'Sunflower Hoodie.jpg' }
     };
+
+    /* 圖片放大 Lightbox 燈箱與內部滑動功能 */
+    function openLightbox(imgElement) {
+      const lightbox = document.getElementById('lightboxOverlay');
+      const lightboxSlider = document.getElementById('lightboxSlider');
+      
+      // 找出當前商品卡片中的所有圖片
+      const productCard = imgElement.closest('.product-card');
+      const allImagesInCard = productCard.querySelectorAll('.slider img');
+      
+      let html = '';
+      let targetIndex = 0;
+
+      allImagesInCard.forEach((img, idx) => {
+        if (img.src === imgElement.src) {
+          targetIndex = idx;
+        }
+        html += `<img src="${img.src}" alt="${img.alt}" onerror="this.src='https://placehold.co/600x600/222222/ffffff?text=Image';">`;
+      });
+
+      lightboxSlider.innerHTML = html;
+      lightbox.classList.add('active');
+
+      // 讓燈箱滑到點擊的那張圖片位置
+      setTimeout(() => {
+        lightboxSlider.scrollTo({ left: targetIndex * lightboxSlider.clientWidth, behavior: 'instant' });
+      }, 10);
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightboxOverlay');
+      lightbox.classList.remove('active');
+    }
+
+    function closeLightboxOnBg(event) {
+      if (event.target.id === 'lightboxOverlay') {
+        closeLightbox();
+      }
+    }
+
+    function moveLightboxSlide(direction) {
+      const slider = document.getElementById('lightboxSlider');
+      const slideWidth = slider.clientWidth;
+      slider.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
+    }
 
     function moveSlide(button, direction) {
       const container = button.parentElement;
